@@ -1,6 +1,6 @@
 import express from 'express'
-import db from './src/core/db.js'
-import lecturasRoutes from './src/routes/lecturaRoutes.js'
+import db from './core/db.js'
+import lecturasRoutes from './routes/lecturaRoutes.js'
 import cors from 'cors'
 
 const app = express()
@@ -13,6 +13,6 @@ const initialPath = "/api"
 app.use(initialPath, lecturasRoutes)
 
 
-app.listen('0.0.0.0', ()=>{
+app.listen(3000,'0.0.0.0', ()=>{
     console.log("app success port: 3000" )
 })
