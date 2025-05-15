@@ -43,57 +43,41 @@ class LecturaService {
        
 
         for (const sensor of sensores) {
-    
+            const newData = {}; // ← mover esto aquí para evitar reuso de valores previos
+        
+            let valorSensor = null;
+        
             switch (sensor.tipo) {
                 case "Temperatura":
-                    if (data.sensores.Temperatura != null) {
-                        console.log("tempera")
-                        newData.sensor_id = sensor.id
-                        newData.valor = data.sensores.Temperatura
-                        break;
-                    }
-                  
-                case "Vibración":
-                    if (data.sensores.Vibración != null) {
-                        console.log("vib")
-                        newData.sensor_id = sensor.id
-                        newData.valor = data.sensores.Vibración
-                        break;
-                    }
-
-                  
-                case "Corriente":
-                    if (data.sensores.Corriente != null) {
-                        console.log("corr")
-                        newData.sensor_id = sensor.id
-                        newData.valor = data.sensores.Corriente
-                        break;
-                    }
-                   
-                case "Humedad":
-                    if (data.sensores.Humedad != null) {
-                        console.log("Humedad")
-                        newData.sensor_id = sensor.id
-                        newData.valor = data.sensores.Humedad
-                        break;
-                    }
-                default:
+                    valorSensor = data.sensores.Temperatura;
                     break;
+                case "Vibración":
+                    valorSensor = data.sensores.Vibración;
+                    break;
+                case "Corriente":
+                    valorSensor = data.sensores.Corriente;
+                    break;
+                case "Humedad":
+                    valorSensor = data.sensores.Humedad;
+                    break;
+                default:
+                    continue; // ← ignorar sensores no reconocidos
             }
-
-            newData.etiqueta = data.etiqueta
-
-            console.log(newData)
-
-            const response = await lecturasRepository.create(newData)
+        
+            if (valorSensor == null) continue; // ← ignorar sensores sin valor
+        
+            newData.sensor_id = sensor.id;
+            newData.valor = valorSensor;
+            newData.etiqueta = data.etiqueta;
+        
+            console.log(newData);
+        
+            const response = await lecturasRepository.create(newData);
             if (!response) {
-                code = 500
+                code = 500;
             }
-
         }
-
-
-
+        
         return { code: code }
     }
 
