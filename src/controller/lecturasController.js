@@ -12,6 +12,15 @@ class LecturasController {
         }
     }
 
+    async getAllData(req, res) {
+        try {
+            const response = await lecturasService.getAllData()
+            return res.status(200).json(response)
+        } catch (error) {
+            return res.status(500).json({ error: error.message })
+        }
+    }
+
     async getById(req, res) {
 
         try {

@@ -29,8 +29,7 @@ Lecturas.init({
     },
     etiqueta:{
         type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "normal"
+        allowNull: true,
     }
 }, {sequelize: db, modelName: "lecturas"})
 

@@ -1,10 +1,12 @@
-import { validationResult , body, param, query} from "express-validator";
+import { validationResult, body, param, query } from "express-validator";
 
-const sensorKeys = ['Temperatura', 'Corriente', 'Vibración'];
+const sensorKeys = ['Temperatura', 'Corriente', 'Vibración', 'Humedad'];
 
 export const createValidator = [
   body('id')
     .notEmpty().withMessage("El campo 'id' no puede estar vacío"),
+  body('id').optional()
+    .notEmpty().withMessage("El campo 'etiqueta' no puede estar vacío"),
 
   // Validaciones individuales de tipo
   ...sensorKeys.map(key =>

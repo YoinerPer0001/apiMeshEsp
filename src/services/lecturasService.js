@@ -4,29 +4,35 @@ import sensoresService from './sensoresService.js'
 
 class LecturaService {
 
-    async getAll(){
+    async getAll() {
         const response = await lecturasRepository.getAll()
         return response
     }
 
-    async getById(id){
-        const response = await lecturasRepository.getById(id)
-        if(!response){
-           return {code: 404, response: 'not found'} 
-        }
-        return {code: 200, response: response} 
+    async getAllData() {
+        const response = await lecturasRepository.getAllData()
+        return response
     }
 
-    async create(data){
+    async getById(id) {
+        const response = await lecturasRepository.getById(id)
+        if (!response) {
+            return { code: 404, response: 'not found' }
+        }
+        return { code: 200, response: response }
+    }
 
+    async create(data) {
+        console.log(data)
         //VERIFICAR A QUE NODO PERTENECE
         const nodoExist = await nodosService.getById(data.id)
 
-        if(nodoExist.code != 200){
-            return {code: 404, response: 'Node not found'} 
+        if (nodoExist.code != 200) {
+            return { code: 404, response: 'Node not found' }
         }
 
         const sensores = await sensoresService.getAllxNodo(data.id)
+  
 
         let newData = {
             sensor_id: null,
@@ -34,60 +40,73 @@ class LecturaService {
         };
 
         let code = 200;
+       
 
         for (const sensor of sensores) {
+    
             switch (sensor.tipo) {
                 case "Temperatura":
-                    if(data.sensores.Temperatura != null){
+                    if (data.sensores.Temperatura != null) {
                         console.log("tempera")
                         newData.sensor_id = sensor.id
                         newData.valor = data.sensores.Temperatura
-                        
+                        break;
                     }
-                    break;
+                  
                 case "Vibración":
-                    if(data.sensores.Vibración != null){
+                    if (data.sensores.Vibración != null) {
                         console.log("vib")
                         newData.sensor_id = sensor.id
                         newData.valor = data.sensores.Vibración
-                       
+                        break;
                     }
-                    
-                    break;
+
+                  
                 case "Corriente":
-                    if(data.sensores.Corriente != null){
+                    if (data.sensores.Corriente != null) {
                         console.log("corr")
                         newData.sensor_id = sensor.id
                         newData.valor = data.sensores.Corriente
-                        
+                        break;
                     }
-                    break;
+                   
+                case "Humedad":
+                    if (data.sensores.Humedad != null) {
+                        console.log("Humedad")
+                        newData.sensor_id = sensor.id
+                        newData.valor = data.sensores.Humedad
+                        break;
+                    }
                 default:
                     break;
             }
 
-            const response= await lecturasRepository.create(newData)
-            if(!response){
+            newData.etiqueta = data.etiqueta
+
+            console.log(newData)
+
+            const response = await lecturasRepository.create(newData)
+            if (!response) {
                 code = 500
             }
-          
+
         }
 
-        
-        
-         return {code: code} 
+
+
+        return { code: code }
     }
 
-    async update(data, id){
+    async update(data, id) {
         const exist = await this.getById(id)
-        if(exist.code != 200){
+        if (exist.code != 200) {
             return exist
         }
         const response = await lecturasRepository.update(data, id)
-        if(!response){
-            return {code: 500, response: 'Error to update'} 
-         }
-         return {code: 200, response: response} 
+        if (!response) {
+            return { code: 500, response: 'Error to update' }
+        }
+        return { code: 200, response: response }
     }
 }
 

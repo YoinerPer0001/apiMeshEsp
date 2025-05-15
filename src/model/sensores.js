@@ -16,7 +16,7 @@ Sensores.init({
         allowNull: false,
     },
     tipo: {
-        type: DataTypes.ENUM("Vibración", "Temperatura", "Corriente"),
+        type: DataTypes.ENUM("Vibración", "Temperatura", "Corriente", "Humedad"),
         allowNull: false,
     },
     unidad : {
