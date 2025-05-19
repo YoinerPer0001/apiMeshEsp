@@ -29,7 +29,7 @@ Sensores.init({
     },
 }, {sequelize: db, modelName: "sensores"})
 
-Nodos.hasMany(Sensores, {foreignKey: "nodo_id", as : "nodo"})
+Nodos.hasMany(Sensores, {foreignKey: "nodo_id", as : "sensores"})
 Sensores.belongsTo(Nodos, {foreignKey: "nodo_id", as : "nodo"})
 
 export default Sensores

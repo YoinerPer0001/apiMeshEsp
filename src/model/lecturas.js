@@ -33,7 +33,7 @@ Lecturas.init({
     }
 }, {sequelize: db, modelName: "lecturas"})
 
-Sensores.hasMany(Lecturas, {foreignKey: "sensor_id", as: "sensor"})
+Sensores.hasMany(Lecturas, {foreignKey: "sensor_id", as: "lecturas"})
 Lecturas.belongsTo(Sensores, {foreignKey: "sensor_id", as: "sensor"})
 
 export default Lecturas

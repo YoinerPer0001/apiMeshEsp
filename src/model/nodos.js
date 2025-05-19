@@ -33,7 +33,7 @@ Nodos.init({
     }
 }, {sequelize: db, modelName: "nodos"})
 
-Maquinas.hasMany(Nodos, {foreignKey: "maquina_id", as: "maquina"})
+Maquinas.hasMany(Nodos, {foreignKey: "maquina_id", as: "nodos"})
 Nodos.belongsTo(Maquinas, {foreignKey: "maquina_id", as: "maquina"})
 
 export default Nodos

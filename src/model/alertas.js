@@ -25,7 +25,7 @@ Alertas.init({
     }
 }, {sequelize: db, modelName: "alertas"})
 
-Sensores.hasMany(Alertas, {foreignKey: "sensor_id", as : "sensor"})
+Sensores.hasMany(Alertas, {foreignKey: "sensor_id", as : "alertas"})
 Alertas.belongsTo(Sensores, {foreignKey: "sensor_id", as : "sensor"})
 
 export default Alertas
