@@ -4,9 +4,20 @@ import maquinasService from "../services/maquinasService.js";
 class MaquinasController {
     async getAll(req, res) {
         try {
-            console.log("llego")
+         
             const response = await maquinasService.getAll()
             res.status(200).json(response)
+        } catch (error) {
+            console.error(error.message)
+            res.status(500).json({error: error.message})
+        }
+    }
+
+    async getById(req, res){
+        try {
+            const {id} = req.query
+            const response = await maquinasService.getById(id)
+            res.status(response.code).json(response.response)
         } catch (error) {
             console.error(error.message)
             res.status(500).json({error: error.message})
