@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import { onDisconnect, onNewData } from './sockets/socket.js';
 import MaquinasRoutes from './routes/maquinasRoutes.js';
 
+
 const app = express()
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -32,6 +33,8 @@ io.on("connection", async (socket) => {
 });
 
 app.use(cors())
+
+
 
 
 
