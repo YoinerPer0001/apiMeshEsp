@@ -10,6 +10,12 @@ class SensoresRepository {
         const response = await Sensores.create(data)
         return response
     }
+
+    async getById(id){
+        const response = await Sensores.findByPk(id)
+        return response
+    }
+
 }
 
 export default new SensoresRepository()

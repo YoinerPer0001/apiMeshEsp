@@ -23,6 +23,7 @@ class NodosService {
         }
         return {code: 200, response: response}
     }
+
 }
 
 export default new NodosService()

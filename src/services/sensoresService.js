@@ -13,6 +13,14 @@ class SensoresService {
             }
             return {code: 200, response: response}
         }
+
+    async getById(id){
+        const response = await sensoresRepository.getById(id)
+        if(!response){
+            return {code: 404, response: 'not found'}
+        }
+        return {code: 200, response: response}
+    }
 }
 
 export default new SensoresService()
