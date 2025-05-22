@@ -13,6 +13,15 @@ class MaquinasServices {
         }
         return {code: 200, response: response}
     }
+
+    async updateMachine(data, id){
+        const exist = await this.getById(id)
+        if(exist.code != 200){
+            return exist.response
+        }
+        const response = maquinasRepository.update(data, id)
+        return {code: 200, response: response}
+    }
 }
 
 export default new MaquinasServices()

@@ -43,6 +43,11 @@ class MaquinasRepository {
     
         return response;
     }
+
+    async update(data, id){
+        const response = Maquinas.update(data, {where: {id:id}})
+        return response
+    }
     
 }
 

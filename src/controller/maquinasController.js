@@ -35,9 +35,19 @@ class MaquinasController {
                 flag: flag
             }
 
-            clientMqtt.publish("testtopic/power",JSON.stringify(data))
+            const status = flag == 0 ? "activo" : "inactivo"
 
-            res.sendStatus(200)
+            const updated = await maquinasService.updateMachine({status: status})
+
+            if(updated){
+                clientMqtt.publish("testtopic/power",JSON.stringify(data))
+
+                res.sendStatus(200)
+            }else{
+                res.sendStatus(500)
+            }
+
+            
 
         } catch (error) {
             console.error(error.message)
