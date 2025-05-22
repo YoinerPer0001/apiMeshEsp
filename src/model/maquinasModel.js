@@ -17,6 +17,10 @@ Maquinas.init({
     modelo: {
         type: DataTypes.STRING(250),
         allowNull: false,
+    },
+    status: {
+        type: DataTypes.ENUM("activo", "inactivo"),
+        defaultValue: "activo"
     }
 }, {sequelize: db, modelName: "maquinas"})
 
