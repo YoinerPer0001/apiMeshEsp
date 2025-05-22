@@ -82,17 +82,13 @@ class LecturaService {
 
             const sensorDb = await sensoresService.getById(response.sensor_id)
 
-            const nodoDB = await nodosService.getById(sensorDb.response.nodo_id)
-
-            const alertas = await Alertas.findAll({where: {sensor_id: sensorDb.response.id}})
-
             const DataSend = {
                             id_lectura : response.id,
                             valor:  parseFloat(newData.valor).toFixed(2),
                             sensor_id : response.sensor_id,
                             nodo_id: sensorDb.response.nodo_id,
-                            maquina_id: nodoDB.response.maquina_id,
-                            alertas: alertas
+                            maquina_id: sensorDb.response.nodo.maquina_id,
+                            alertas: sensorDb.response.alertas
                         }
 
                 //prediction and emmit value

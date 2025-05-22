@@ -1,3 +1,6 @@
+import Alertas from "../model/alertas.js";
+import Maquinas from "../model/maquinasModel.js";
+import Nodos from "../model/nodos.js";
 import Sensores from "../model/sensores.js";
 
 class SensoresRepository {
@@ -12,7 +15,8 @@ class SensoresRepository {
     }
 
     async getById(id){
-        const response = await Sensores.findByPk(id)
+        const response = await Sensores.findByPk(id,{include: [{model: Nodos, as: "nodo"},{model: Alertas, as: "alertas"}]})
+        console.log(response.dataValues)
         return response
     }
 
