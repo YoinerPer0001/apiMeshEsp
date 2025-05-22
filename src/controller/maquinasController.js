@@ -47,7 +47,7 @@ class MaquinasController {
             if (updated) {
                 const data = {
                     id: nodo.response.id,
-                    flag: flag
+                    flag: parseInt(flag)
                 }
 
                 console.log(data)
