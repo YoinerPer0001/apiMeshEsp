@@ -40,15 +40,25 @@ class MaquinasRepository {
                 }
             }
         });
-    
+
         return response;
     }
 
-    async update(data, id){
-        const response = Maquinas.update(data, {where: {id:id}})
+    async update(data, id) {
+        const response = Maquinas.update(data, { where: { id: id } })
         return response
     }
-    
+
+    async create(data) {
+        const response = Maquinas.create(data)
+        return response
+    }
+
+    async destroy(id) {
+        const response = await Maquinas.destroy({ where: { id: id } })
+        return response
+    }
+
 }
 
 export default new MaquinasRepository()

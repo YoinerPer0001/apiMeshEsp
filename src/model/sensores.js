@@ -6,10 +6,10 @@ class Sensores extends Model {}
 
 Sensores.init({
     id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        defaultValue: UUIDV4
+        autoIncrement: true
     },
     nombre: {
         type: DataTypes.STRING(255),

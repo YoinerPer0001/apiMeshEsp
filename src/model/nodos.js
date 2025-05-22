@@ -9,7 +9,6 @@ Nodos.init({
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        defaultValue: UUIDV4
     },
     nombre: {
         type: DataTypes.STRING(255),
@@ -22,12 +21,17 @@ Nodos.init({
     estado: {
         type: DataTypes.ENUM("activo", "inactivo"),
         allowNull: false,
+        defaultValue: "activo"
+    },
+    descripcion: {
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
     fecha_instalacion: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: () => {
-            const timestampInBogota = DateTime.now();
+            const timestampInBogota = Date.now();
             return timestampInBogota;
         }
     }

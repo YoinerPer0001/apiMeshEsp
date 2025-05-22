@@ -5,6 +5,11 @@ class SensoresRepository {
         const response = await Sensores.findAll({where:{nodo_id: id}})
         return response
     }
+
+    async create(data){
+        const response = await Sensores.create(data)
+        return response
+    }
 }
 
 export default new SensoresRepository()
