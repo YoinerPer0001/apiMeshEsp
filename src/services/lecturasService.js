@@ -88,7 +88,7 @@ class LecturaService {
 
             const DataSend = {
                             id_lectura : response.id,
-                            valor:  parseFloat(response.valor).toFixed(2),
+                            valor:  parseFloat(newData.valor).toFixed(2),
                             sensor_id : response.sensor_id,
                             nodo_id: sensorDb.response.nodo_id,
                             maquina_id: nodoDB.response.maquina_id,
