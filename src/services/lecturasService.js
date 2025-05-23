@@ -64,7 +64,7 @@ class LecturaService {
             if (valorSensor == null) continue; // ← ignorar sensores sin valor
 
             newData.sensor_id = sensor.id;
-            newData.valor = valorSensor;
+            newData.valor = parseFloat(valorSensor).toFixed(3);
             newData.etiqueta = data.etiqueta;
 
             console.log(newData);
