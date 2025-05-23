@@ -1,9 +1,11 @@
+import Alertas from "../model/alertas.js";
 import Nodos from "../model/nodos.js";
+import Sensores from "../model/sensores.js";
 
 
 class NodosRepository {
     async getById(id){
-        const response = await Nodos.findByPk(id)
+        const response = await Nodos.findByPk(id, {include: {model: Sensores, as : "sensores", include : {model: Alertas, as: "alertas"}}})
         return response
     }
 
