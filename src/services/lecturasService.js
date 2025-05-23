@@ -84,12 +84,12 @@ class LecturaService {
 
             for(const s of sensores){
                 
-                if(s.alertas[0] != null){
-                    alertas.push(s.alertas[0])
+                for(const alerta of s.alertas){
+                    alertas.push(alerta)
                 }
-                
+               
             }
-
+    
 
             const DataSend = {
                 id_lectura: response.id,
