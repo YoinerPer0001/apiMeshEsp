@@ -15,7 +15,7 @@ class SensoresRepository {
     }
 
     async getById(id){
-        const response = await Sensores.findByPk(id,{include: [{model: Nodos, as: "nodo"},{model: Alertas, as: "alertas"}]})
+        const response = await Sensores.findByPk(id,{include: [{model: Nodos, as: "nodo", include : {model: Maquinas, as: "maquina"}},{model: Alertas, as: "alertas"}]})
         console.log(response.dataValues)
         return response
     }

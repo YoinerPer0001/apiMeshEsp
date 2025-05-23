@@ -36,12 +36,6 @@ class LecturaService {
 
         const sensores = await sensoresService.getAllxNodo(data.id)
 
-
-        let newData = {
-            sensor_id: null,
-            valor: null
-        };
-
         let code = 200;
 
 
@@ -83,35 +77,37 @@ class LecturaService {
             const sensorDb = await sensoresService.getById(response.sensor_id)
 
             const DataSend = {
-                            id_lectura : response.id,
-                            valor:  parseFloat(newData.valor).toFixed(2),
-                            sensor_id : response.sensor_id,
-                            nodo_id: sensorDb.response.nodo_id,
-                            maquina_id: sensorDb.response.nodo.maquina_id,
-                            alertas: sensorDb.response.alertas
-                        }
-
-                //prediction and emmit value
-                io.emit("newData", DataSend);
-
+                id_lectura: response.id,
+                valor: parseFloat(newData.valor).toFixed(2),
+                sensor_id: response.sensor_id,
+                nodo_id: sensorDb.response.nodo_id,
+                maquina_id: sensorDb.response.nodo.maquina_id,
+                alertas: sensorDb.response.alertas
             }
 
-            return { code: code }
+            //prediction and emmit value
+            io.emit("newData", DataSend);
+
         }
+
+        
+
+        return { code: code }
+    }
 
     async update(data, id) {
-            const exist = await this.getById(id)
-            if (exist.code != 200) {
-                return exist
-            }
-            const response = await lecturasRepository.update(data, id)
-            if (!response) {
-                return { code: 500, response: 'Error to update' }
-            }
-            return { code: 200, response: response }
+        const exist = await this.getById(id)
+        if (exist.code != 200) {
+            return exist
         }
-
-
+        const response = await lecturasRepository.update(data, id)
+        if (!response) {
+            return { code: 500, response: 'Error to update' }
+        }
+        return { code: 200, response: response }
     }
+
+
+}
 
 export default new LecturaService();

@@ -7,6 +7,20 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import { onDisconnect } from './sockets/socket.js';
 import MaquinasRoutes from './routes/maquinasRoutes.js';
+import cron from 'node-cron'
+
+
+cron.schedule('*/5 * * * *', async () => {
+    try {
+      console.log('Despertando Api...');
+  
+      const response = await axios.get('https://apipredictionmachines.onrender.com');
+  
+      console.log('Respuesta de la API:', response.data);
+    } catch (error) {
+      console.error('Error al llamar a la API:', error.message);
+    }
+});
 
 const app = express()
 const httpServer = createServer(app);
