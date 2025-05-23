@@ -83,8 +83,11 @@ class LecturaService {
             const alertas = []
 
             for(const s of sensores){
-                console.log(s.alertas)
-                alertas.push(s.alertas)
+                
+                if(s.alertas[0] != null){
+                    alertas.push(s.alertas[0])
+                }
+                
             }
 
 
